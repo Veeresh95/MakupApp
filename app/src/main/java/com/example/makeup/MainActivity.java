@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+//getting error
         recyclerView=(RecyclerView)findViewById(R.id.course_recyclerview);
         noData=findViewById(R.id.noData);
 
