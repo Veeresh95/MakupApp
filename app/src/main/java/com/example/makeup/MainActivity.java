@@ -7,12 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.makeup.Model.DataResponse;
+import com.example.makeup.Model.ServerResponse;
 import com.example.makeup.viewmodels.viewmodel;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     TextView noData;
-    DataResponse data;
+    ServerResponse data;
      viewmodel  viewm_odel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         viewm_odel= ViewModelProviders.of(this).get(viewmodel.class);
-        viewm_odel.getCourses().observe(this, new Observer<DataResponse>() {
+        viewm_odel.getCourses().observe(this, new Observer<ServerResponse>() {
             @Override
-            public void onChanged(DataResponse dataResponse) {
+            public void onChanged(ServerResponse dataResponse) {
 
                 if (dataResponse!=null){
-
+//
                     noData.setVisibility(View.GONE);
                     data=dataResponse;
                     adapter.setCourses(data);

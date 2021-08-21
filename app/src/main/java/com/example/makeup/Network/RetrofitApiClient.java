@@ -17,7 +17,7 @@ public class RetrofitApiClient {
 
     public static Retrofit getClient()
     {
-        String URL_BASEURL="http://makeup-api.herokuapp.com/";
+        String URL_BASEURL="https://makeup-api.herokuapp.com/";
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();

@@ -1,15 +1,12 @@
 package com.example.makeup.Network;
 
-import com.example.makeup.Model.DataResponse;
+import com.example.makeup.Model.ServerResponse;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
+import retrofit2.http.GET;
 
 public interface Api {
-    @Headers("Content-Type: application/json")
-    @POST("api/v1/products.json")
-    Call<DataResponse> loadCourse();
+
+    @GET("api/v1/products.json")
+    Call<ServerResponse> getJSON();
 }

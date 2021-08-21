@@ -1,7 +1,6 @@
 package com.example.makeup;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -14,20 +13,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.makeup.Model.DataResponse;
+import com.example.makeup.Model.ServerResponse;
 import com.squareup.picasso.Picasso;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
 
-    DataResponse dataResponse;
+    ServerResponse dataResponse;
     Context context;
-    public Adapter( DataResponse dataResponse, Context context) {
+    public Adapter(ServerResponse dataResponse, Context context) {
         this.dataResponse=dataResponse;
         this.context=context;
     }
 
-    public void setCourses(DataResponse dataResponse){
+    public void setCourses(ServerResponse dataResponse){
         this.dataResponse=dataResponse;
         notifyDataSetChanged();
     }
@@ -45,15 +44,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
 
 
-        holder.desc.setText(this.dataResponse.getName());
-        holder.name.setText(this.dataResponse.getDescription());
-        holder.rating.setText(this.dataResponse.getRating());
-        holder.category.setText(this.dataResponse.getCategory());
-        holder.price.setText(this.dataResponse.getPrice());
-        holder.currency.setText(this.dataResponse.getCurrency());
+        holder.desc.setText(this.dataResponse.getServerResponse().getName());
+        holder.name.setText(this.dataResponse.getServerResponse().getDescription());
+        holder.rating.setText(this.dataResponse.getServerResponse().getRating());
+        holder.category.setText(this.dataResponse.getServerResponse().getCategory());
+        holder.price.setText(this.dataResponse.getServerResponse().getPrice());
+        holder.currency.setText(this.dataResponse.getServerResponse().getCurrency());
 
 
-        Uri  uri1 = Uri.parse(dataResponse.getImageLink());
+        Uri  uri1 = Uri.parse(dataResponse.getServerResponse().getImageLink());
         context = holder.course_img.getContext();
 
 
@@ -76,7 +75,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @Override
     public int getItemCount() {
         if (this.dataResponse!=null){
-            return this.dataResponse.getProductColors().size();
+            return this.dataResponse.getServerResponse().getProductColors().size();
         }
         return 0;//withdrawLists.length; //userlmh.size();
     }
