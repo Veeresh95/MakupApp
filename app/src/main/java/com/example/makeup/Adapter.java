@@ -31,7 +31,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         this.context=context;
     }
 
-
+    // method for filtering our recyclerview items.
+    public void filterList(List<ServerResponse> filterllist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        dataResponse = filterllist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -85,6 +93,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 parent1=(LinearLayout) itemView.findViewById(R.id.parent);
 
 
+                name1.setTextColor(Integer.parseInt("#"+Integer.parseInt(dataResponse.get(position).getProduct_colors().get(position).getHexValue())));
                 desc1.setText(dataResponse.get(position).getName());
                 name1.setText(dataResponse.get(position).getDescription());
                 //  holder.rating.setText(dataResponse.get(position).getRating());
