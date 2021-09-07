@@ -56,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadJSON() {
 
+
+        pDialog = new ProgressDialog(context);
+        pDialog.setTitle("Loading...");
+        pDialog.setMessage("Please wait...");
+        pDialog.setIndeterminateDrawable(context.getResources().getDrawable(R.drawable.style));
+        pDialog.setCancelable(false);
+        pDialog.show();
+
         dataArrayList = new ArrayList<>();
         Retrofit retrofit=new Retrofit.Builder().baseUrl("https://makeup-api.herokuapp.com/").addConverterFactory(GsonConverterFactory.create()).build();
         Api api=retrofit.create(Api.class);
@@ -65,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ServerResponse>> call, Response<List<ServerResponse>> response) {
 
+                pDialog.dismiss();
                 assert response.body() != null;
 
 
@@ -76,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<ServerResponse>> call, Throwable t) {
-
+                pDialog.dismiss();
                 Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

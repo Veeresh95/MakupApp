@@ -6,11 +6,14 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makeup.Model.ServerResponse;
@@ -33,7 +36,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_layout, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
         return new MyViewHolder(v);
     }
 
@@ -45,10 +48,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
         holder.desc.setText(dataResponse.get(position).getName());
         holder.name.setText(dataResponse.get(position).getDescription());
-        holder.rating.setText(dataResponse.get(position).getRating());
+      //  holder.rating.setText(dataResponse.get(position).getRating());
         holder.category.setText(dataResponse.get(position).getCategory());
         holder.price.setText(dataResponse.get(position).getPrice());
-        holder.currency.setText(this.dataResponse.get(position).getCurrency());
+        holder.currency.setText(dataResponse.get(position).getCurrency());
 
 
         Uri  uri1 = Uri.parse(dataResponse.get(position).getImage_link());
@@ -62,6 +65,63 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 .into(holder.course_img);
 
 
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());
+                View itemView=LayoutInflater.from(context).inflate(R.layout.image_layout,null);
+
+                TextView name1,desc1,price1,currency1,category1;
+                    ImageView    course_img1;
+                     LinearLayout       parent1;
+
+                name1=(TextView) itemView.findViewById(R.id.name);
+                desc1 = (TextView) itemView.findViewById(R.id.description);
+                price1 = (TextView) itemView.findViewById(R.id.price);
+                currency1 = (TextView) itemView.findViewById(R.id.currency);
+                //   rating=(TextView) itemView.findViewById(R.id.rating);
+                category1=(TextView) itemView.findViewById(R.id.category);
+                course_img1=(ImageView) itemView.findViewById(R.id.image);
+                parent1=(LinearLayout) itemView.findViewById(R.id.parent);
+
+
+                desc1.setText(dataResponse.get(position).getName());
+                name1.setText(dataResponse.get(position).getDescription());
+                //  holder.rating.setText(dataResponse.get(position).getRating());
+                category1.setText(dataResponse.get(position).getCategory());
+                price1.setText(dataResponse.get(position).getPrice());
+                currency1.setText(dataResponse.get(position).getCurrency());
+
+
+                Uri  uri1 = Uri.parse(dataResponse.get(position).getImage_link());
+                context = course_img1.getContext();
+
+
+                Picasso.with(context)
+                        .load(uri1)
+                        .placeholder(R.drawable.ic_launcher_background) //this is optional the image to display while the url image is downloading
+                        .error(R.drawable.ic_launcher_background)         //this is also optional if some error has occurred in downloading the image this image would be displayed
+                        .into(course_img1);
+
+
+                alertDialog.setView(itemView);
+                final AlertDialog dialog = alertDialog.create();
+                dialog.show();
+
+                if (dialog.getWindow()!=null){
+
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(dialog.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.height =  WindowManager.LayoutParams.WRAP_CONTENT;
+                    dialog.getWindow().setAttributes(lp);
+
+                }
+
+
+
+            }
+        });
 
         //animate(holder);
 
@@ -83,7 +143,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
         TextView name,desc,price,currency,rating,category;
         ImageView course_img;
-
+        LinearLayout parent;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -92,10 +152,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             desc = (TextView) itemView.findViewById(R.id.description);
             price = (TextView) itemView.findViewById(R.id.price);
             currency = (TextView) itemView.findViewById(R.id.currency);
-            rating=(TextView) itemView.findViewById(R.id.rating);
+         //   rating=(TextView) itemView.findViewById(R.id.rating);
             category=(TextView) itemView.findViewById(R.id.category);
             course_img=(ImageView) itemView.findViewById(R.id.image);
-
+            parent=(LinearLayout) itemView.findViewById(R.id.parent);
 
 
         }
