@@ -2,6 +2,7 @@ package com.example.makeup;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,8 +55,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
 
 
-        holder.desc.setText(dataResponse.get(position).getName());
-        holder.name.setText(dataResponse.get(position).getDescription());
+        holder.desc.setText(dataResponse.get(position).getDescription());
+        holder.name.setText(dataResponse.get(position).getName());
       //  holder.rating.setText(dataResponse.get(position).getRating());
         holder.category.setText(dataResponse.get(position).getCategory());
         holder.price.setText(dataResponse.get(position).getPrice());
@@ -93,9 +94,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 parent1=(LinearLayout) itemView.findViewById(R.id.parent);
 
 
-                name1.setTextColor(Integer.parseInt("#"+Integer.parseInt(dataResponse.get(position).getProduct_colors().get(position).getHexValue())));
-                desc1.setText(dataResponse.get(position).getName());
-                name1.setText(dataResponse.get(position).getDescription());
+                if (dataResponse.get(position).getProduct_colors().get(position).getHexValue()!=null){
+                    desc1.setTextColor(Color.parseColor(dataResponse.get(position).getProduct_colors().get(position).getHexValue()));
+                }
+
+                desc1.setText(dataResponse.get(position).getDescription());
+                name1.setText(dataResponse.get(position).getName());
                 //  holder.rating.setText(dataResponse.get(position).getRating());
                 category1.setText(dataResponse.get(position).getCategory());
                 price1.setText(dataResponse.get(position).getPrice());

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         // running a for loop to compare elements.
         for (ServerResponse item : dataArrayList) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+            if (item.getName().toLowerCase().contains(text.toLowerCase())||item.getCategory().toLowerCase().contains(text.toLowerCase())) {
                 // if the item is matched we are
                 // adding it to our filtered list.
                 filteredlist.add(item);
