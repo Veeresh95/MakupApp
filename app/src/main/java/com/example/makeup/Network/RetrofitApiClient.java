@@ -32,7 +32,7 @@ public class RetrofitApiClient {
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(URL_BASEURL)
-                    .addConverterFactory(ScalarsConverterFactory.create())
+                //    .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(okHttpClient)
                     .build();

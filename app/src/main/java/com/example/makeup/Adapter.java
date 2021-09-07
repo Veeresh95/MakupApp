@@ -16,20 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.makeup.Model.ServerResponse;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
 
-    ServerResponse dataResponse;
+    List<ServerResponse> dataResponse;
     Context context;
-    public Adapter(ServerResponse dataResponse, Context context) {
+    public Adapter(List<ServerResponse> dataResponse, Context context) {
         this.dataResponse=dataResponse;
         this.context=context;
     }
 
-    public void setCourses(ServerResponse dataResponse){
-        this.dataResponse=dataResponse;
-        notifyDataSetChanged();
-    }
+
 
     @NonNull
     @Override
@@ -44,15 +43,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
 
 
-        holder.desc.setText(this.dataResponse.getServerResponse().getName());
-        holder.name.setText(this.dataResponse.getServerResponse().getDescription());
-        holder.rating.setText(this.dataResponse.getServerResponse().getRating());
-        holder.category.setText(this.dataResponse.getServerResponse().getCategory());
-        holder.price.setText(this.dataResponse.getServerResponse().getPrice());
-        holder.currency.setText(this.dataResponse.getServerResponse().getCurrency());
+        holder.desc.setText(dataResponse.get(position).getName());
+        holder.name.setText(dataResponse.get(position).getDescription());
+        holder.rating.setText(dataResponse.get(position).getRating());
+        holder.category.setText(dataResponse.get(position).getCategory());
+        holder.price.setText(dataResponse.get(position).getPrice());
+        holder.currency.setText(this.dataResponse.get(position).getCurrency());
 
 
-        Uri  uri1 = Uri.parse(dataResponse.getServerResponse().getImageLink());
+        Uri  uri1 = Uri.parse(dataResponse.get(position).getImage_link());
         context = holder.course_img.getContext();
 
 
@@ -75,7 +74,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @Override
     public int getItemCount() {
         if (this.dataResponse!=null){
-            return this.dataResponse.getServerResponse().getProductColors().size();
+            return this.dataResponse.size();
         }
         return 0;//withdrawLists.length; //userlmh.size();
     }
@@ -96,7 +95,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             rating=(TextView) itemView.findViewById(R.id.rating);
             category=(TextView) itemView.findViewById(R.id.category);
             course_img=(ImageView) itemView.findViewById(R.id.image);
-
 
 
 
